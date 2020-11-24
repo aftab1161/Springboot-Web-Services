@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,7 +67,7 @@ public class UserController {
 	private jwtUtil jwtutil;
 
 	@PostMapping("/signup")
-	public ResponseEntity<serverResp> addUser(@Valid @RequestBody User user) {
+	public ResponseEntity<serverResp> addUser(@RequestBody User user) {
 
 		serverResp resp = new serverResp();
 		try {
@@ -91,7 +91,7 @@ public class UserController {
 	}
 
 	@PostMapping("/verify")
-	public ResponseEntity<serverResp> verifyUser(@Valid @RequestBody Map<String, String> credential) {
+	public ResponseEntity<serverResp> verifyUser(@RequestBody Map<String, String> credential) {
 
 		String email = "";
 		String password = "";
@@ -116,7 +116,7 @@ public class UserController {
 	}
 
 	@PostMapping("/addAddress")
-	public ResponseEntity<userResp> addAddress(@Valid @RequestBody Address address,
+	public ResponseEntity<userResp> addAddress(@RequestBody Address address,
 			@RequestHeader(name = WebConstants.USER_AUTH_TOKEN) String AUTH_TOKEN) {
 		userResp resp = new userResp();
 		if (Validator.isAddressEmpty(address)) {
