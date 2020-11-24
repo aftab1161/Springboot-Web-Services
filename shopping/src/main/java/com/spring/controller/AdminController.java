@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,7 +57,7 @@ public class AdminController {
 	private jwtUtil jwtutil;
 
 	@PostMapping("/verify")
-	public ResponseEntity<serverResp> verifyUser(@Valid @RequestBody HashMap<String, String> credential) {
+	public ResponseEntity<serverResp> verifyUser( @RequestBody HashMap<String, String> credential) {
 		String email = "";
 		String password = "";
 		if (credential.containsKey(WebConstants.USER_EMAIL)) {
