@@ -15,10 +15,10 @@ public class ValidatorTest {
 
 
     @ParameterizedTest
-    @CsvSource({"123,true", "tEst,false"})
+    @CsvSource({"123,true", "tEst,true", "123@, false"})
     void isAlphaNumericalTest(String input, String  expected) {
 
-        String actualValue = String.valueOf(Validator.isNumerical(input));
+        String actualValue = String.valueOf(Validator.isAlphaNumerical(input));
         Assertions.assertEquals(expected, actualValue);
     }
 
