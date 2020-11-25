@@ -99,7 +99,12 @@ public class ValidatorTest {
 
 
     @ParameterizedTest
-    @CsvSource({"1, abc@gmail.com, abc, xyz, 27, false"})
+    @CsvSource(
+            {
+                    "1, abc@gmail.com, abc, xyz, 27, false",
+                    "1, abc@gmail.com, abc, xyz, 0, true",
+                    "1, abc@gmail.com,, xyz, 27, true",
+            })
     void isUserEmptyTest(int userid, String email, String username, String password, int age, String expected) {
         User user = new User(userid, email, username, password, age, new Address());
 
