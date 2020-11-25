@@ -51,6 +51,10 @@ public class ValidatorTest {
     @ParameterizedTest
     @CsvSource(
             {
+                    ", false",
+                    "abc@gmail, false",
+                    "@gmail.com, false",
+                    "abc.com, false",
                     "test@gmail.com,true",
                     "@gmail.com,false",
                     "abc@iiitb.ac.in, true"
@@ -62,7 +66,13 @@ public class ValidatorTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"123,true", "tEst,false"})
+    @CsvSource(
+            {
+                    ",false",
+                    "tEst,false",
+                    "abc.jpg, true",
+                    "abc.ppt, false"
+            })
     void isImageFileTest(String input, String  expected) {
 
         String actualValue = String.valueOf(Validator.isImageFile(input));
@@ -71,10 +81,19 @@ public class ValidatorTest {
 
 
     @ParameterizedTest
-    @CsvSource({"123,true", "tEst,false"})
+    @CsvSource(
+            {
+                    " ,",
+                    "  test,test",
+                    "test  ,test",
+                    "  test  ,test",
+                    "te  st,test",
+                    "  t es t ,test",
+
+            })
     void removeSpacesTest(String input, String  expected) {
 
-        String actualValue = String.valueOf(Validator.removeSpaces(input));
+        String actualValue = Validator.removeSpaces(input);
         Assertions.assertEquals(expected, actualValue);
     }
 

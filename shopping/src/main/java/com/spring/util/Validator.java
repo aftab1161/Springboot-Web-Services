@@ -48,6 +48,7 @@ public class Validator {
 	}
 
 	public static String removeSpaces(String input) {
+	    if(input == null) return null;
 		String filterInput = "";
 		if (input != null && input != "") {
 			filterInput = input.replace(" ", "");
