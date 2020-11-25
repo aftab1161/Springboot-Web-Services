@@ -29,7 +29,8 @@ public class Validator {
 
 	public static boolean isValidEmail(String input) {
 		if (input != null && input != "") {
-			if (input.matches("^[a-zA-Z0-9._]*@[a-zA-Z0-9.-]*$")) {
+//			if (input.matches("^[a-zA-Z0-9._]*@[a-zA-Z0-9.-]*$")) {
+			if (input.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
 				return true;
 			}
 		}

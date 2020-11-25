@@ -8,6 +8,7 @@ import com.spring.util.Validator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 
 public class ValidatorTest {
@@ -15,7 +16,14 @@ public class ValidatorTest {
 
 
     @ParameterizedTest
-    @CsvSource({"123,true", "tEst,true", "123@, false"})
+    @CsvSource(
+            {
+                    "123,true",
+                    "tEst,true",
+                    "@&, false",
+                    "ab&c, false",
+                    "abc123&, false"
+            })
     void isAlphaNumericalTest(String input, String  expected) {
 
         String actualValue = String.valueOf(Validator.isAlphaNumerical(input));
@@ -25,7 +33,14 @@ public class ValidatorTest {
 
 
     @ParameterizedTest
-    @CsvSource({"123,true", "tEst,false"})
+    @CsvSource(
+            {
+                    "123,true",
+                    "tEst,false",
+                    "@&, false",
+                    "ab&c, false",
+                    "abc123, false"
+            })
     void isNumericalTest(String input, String  expected) {
 
         String actualValue = String.valueOf(Validator.isNumerical(input));
@@ -34,10 +49,15 @@ public class ValidatorTest {
 
 
     @ParameterizedTest
-    @CsvSource({"123,true", "tEst,false"})
+    @CsvSource(
+            {
+                    "test@gmail.com,true",
+                    "@gmail.com,false",
+                    "abc@iiitb.ac.in, true"
+            })
     void isValidEmailTest(String input, String  expected) {
 
-        String actualValue = String.valueOf(Validator.isNumerical(input));
+        String actualValue = String.valueOf(Validator.isValidEmail(input));
         Assertions.assertEquals(expected, actualValue);
     }
 
@@ -45,7 +65,7 @@ public class ValidatorTest {
     @CsvSource({"123,true", "tEst,false"})
     void isImageFileTest(String input, String  expected) {
 
-        String actualValue = String.valueOf(Validator.isNumerical(input));
+        String actualValue = String.valueOf(Validator.isImageFile(input));
         Assertions.assertEquals(expected, actualValue);
     }
 
@@ -54,7 +74,7 @@ public class ValidatorTest {
     @CsvSource({"123,true", "tEst,false"})
     void removeSpacesTest(String input, String  expected) {
 
-        String actualValue = String.valueOf(Validator.isNumerical(input));
+        String actualValue = String.valueOf(Validator.removeSpaces(input));
         Assertions.assertEquals(expected, actualValue);
     }
 
@@ -68,14 +88,4 @@ public class ValidatorTest {
         Assertions.assertEquals(expected, actualValue);
     }
 
-
-
-
-    @ParameterizedTest
-    @CsvSource({"123,true", "tEst,false"})
-    void isStringEmptyTest(String input, String  expected) {
-
-        String actualValue = String.valueOf(Validator.isNumerical(input));
-        Assertions.assertEquals(expected, actualValue);
-    }
 }
